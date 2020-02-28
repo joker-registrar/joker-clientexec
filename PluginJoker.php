@@ -304,7 +304,6 @@ class PluginJoker extends RegistrarPlugin implements ICanImportDomains
         if ($Joker->hasError()) {
             throw new CE_Exception("Joker.com API Error: Registrant: " . $Joker->getError());
         }
-
         return $Joker->getValue('handle');
     }
 
@@ -324,8 +323,8 @@ class PluginJoker extends RegistrarPlugin implements ICanImportDomains
         } else {
             $nslist = array();
             for ($i = 1; $i <= 5; $i++) {
-                if (isset($params["NS$i"]) && !empty($params["NS$i"])) {
-                    $nslist[] = $params["NS$i"];
+                if (isset($params["NS$i"]) && !empty($params["NS$i"]['hostname'])) {
+                    $nslist[] = $params["NS$i"]['hostname'];
                 }
             }
             $reqParams["ns-list"] = implode(':', $nslist);
