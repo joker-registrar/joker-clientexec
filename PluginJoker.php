@@ -811,6 +811,9 @@ class PluginJoker extends RegistrarPlugin implements ICanImportDomains
             }
 
             if (in_array($data['type'],array("domain","domain_promo"))) {
+                if (!isset($tlds[$data['tld']])) {
+                    $tlds[$data['tld']] = Array('pricing' => Array());
+                }
                 switch($data['operation']) {
                     case "create":
                         $tlds[$data['tld']]['pricing']['register'] = $data['price-1y'];
